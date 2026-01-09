@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Cross-Domain Human Action Recognition from Multiview Motion and Textual Descriptions.">
+  <meta name="keywords" content="Human Action Recognition, HAR, Zero-Shot Learning, ZSL, Computer Vision, Deep Learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cross-Domain Human Action Recognition from Multiview Motion and Textual Descriptions</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/kick.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://yanik-porto.github.io">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Cross-Domain Human Action Recognition from Multiview Motion and Textual Descriptions</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://yanik-porto.github.io">Yannick Porto</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://renatojmsdh.github.io/">Renato Martins</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a>Thomas Chalumeau</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://sites.google.com/view/cedricdemonceaux">Cédric Demonceaux</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Université Bourgogne Europe,</span>
+            <span class="author-block"><sup>2</sup>TEB Group</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/yanik-porto/oa-network"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Paper Image. -->
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <!-- <div class="publication-body"> -->
+      <div class="columns is-vcentered interpolation-panel">
+        <img src="./static/images/overview.png" class="interpolation-image" alt="Training pipeline." />
+      </div>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Overview.</span> Our method leverages motion cues of multiple camera viewpoints and textual descriptions of human actions in the training phase to handle geometric domain gaps between the training and test sets.
+      </h2>
+    </div>
+  </div>
+  <!--/ Paper Image. -->
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-kick-cam1">
+          <video poster="" id="kick-cam1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/kick_cam1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-kick-cam2">
+          <video poster="" id="kick-cam2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/kick_cam2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-kick-cam3">
+          <video poster="" id="kick-cam3" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/kick_cam3.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-clap-cam1">
+          <video poster="" id="clap-cam1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/clap_cam1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-clap-cam2">
+          <video poster="" id="clap-cam2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/clap_cam2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-kick-cam1">
+          <video poster="" id="kick-cam1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/kick_cam1_ntu.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-kick-cam2">
+          <video poster="" id="kick-cam2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/kick_cam2_ntu.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-kick-cam3">
+          <video poster="" id="kick-cam3" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/kick_cam3_ntu.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <!-- <div class="item item-clap-cam1">
+          <video poster="" id="clap-cam1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/clap_cam1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-clap-cam2">
+          <video poster="" id="clap-cam2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/clap_cam2.mp4"
+                    type="video/mp4">
+          </video> -->
+        <div class="item item-kick-cam1">
+          <video poster="" id="kick-cam1" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/kick_cam1_ntu.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-kick-cam2">
+          <video poster="" id="kick-cam2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/kick_cam2_ntu.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-kick-cam3">
+          <video poster="" id="kick-cam3" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/kick_cam3_ntu.mp4" type="video/mp4">
+          </video>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+Cross-domain action recognition is a key capability for effective deployment of human recognition systems to be deployed
+in real-world scenarios, where action categories at inference can present important domain shifts or even unseen actions
+from training. In this context, improving the recognition capabilities of Zero-Shot Action Recognition (ZSAR) without
+requiring additional annotated samples remains a central challenge. However, most existing zero-shot approaches
+assume that unseen actions are observed under geometric conditions similar to those seen during training. In practice,
+variations in human body orientation and camera viewpoint introduce a significant gap in ZSAR, substantially limiting
+generalization to novel action–motion combinations. Our approach leverages motion cues of multiple camera viewpoints
+and text descriptions of human actions in the training phase. We present a new orientation-aware motion encoding network
+to learn different motion features, and adapt a specific orientation-aware text prompt to match the corresponding
+features at inference. Extensive experiments demonstrate that the proposed method consistently improves ZSAR performance across varying numbers
+of views and text prompts, outperforming recent state-of-the-art zero-shot approaches on NTU-RGB+D, BABEL, NW-UCLA, and
+two surveillance benchmarks. In addition, the learned representations exhibit strong transfer learning capabilities,
+yielding competitive performance on both cross-domain and same-domain recognition of seen actions. Code and trained
+models will be released.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper Image. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Applications</h2>
+        <!-- <div class="publication-body"> -->
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="./static/images/qualitative.png" class="interpolation-image" alt="Overview of our method." />
+        </div>
+      </div>
+    </div>
+    <!--/ Paper Image. -->
+
+  </div>
+</section>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="https://github.com/yanik-porto/oa-network" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
