@@ -1,4 +1,4 @@
-# OANetwork
+# OrientationAware-HAR
 
 This is the repository that contains source code for the paper "Cross-Domain Human Action Recognition from Multiview Motion and Textual Descriptions"
 
