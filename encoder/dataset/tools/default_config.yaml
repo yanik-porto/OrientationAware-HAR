@@ -1,0 +1,76 @@
+encoder:
+  name: 'stgcn'
+
+#############################
+
+head:
+  name: 'mlp'
+  params:
+    num_classes: 120
+    in_channels: 256
+
+#############################
+
+train:
+  dataset:
+    name: 'babel_mv'
+    split: 'xsub_train'
+    file: "../data/babel_mv/babel_mv_0.2.pkl"
+
+  preprocessing:
+    PreNormalize2D:
+      threshold: 0.01
+      mode: 'auto'
+    UniformSample:
+      clip_len: 150
+    PoseDecode: 0
+    Collect:
+       keys: ['keypoint', 'label', 'binary_labels']
+       meta_keys: []
+    ToTensor:
+       keys: ['keypoint']
+
+
+  dataloader:
+    batch_size: 16
+    # shuffle: True
+    num_workers: 1
+    pin_memory: True
+    prefetch_factor: 2
+    persistent_workers: True
+
+  settings:
+    num_epochs: 100
+    lr: 0.01
+    lr_decay: 0.1
+    save_interval: 1
+
+#############################
+
+test:
+  dataset:
+    name: 'babel_mv'
+    split: 'xsub_val'
+    file: "../data/babel_mv/babel_mv_0.2.pkl"
+
+  preprocessing:
+    PreNormalize2D:
+      threshold: 0.01
+      mode: 'auto'
+    UniformSample:
+      clip_len: 150
+    PoseDecode: 0
+    Collect:
+       keys: ['keypoint', 'label', 'binary_labels']
+       meta_keys: []
+    ToTensor:
+       keys: ['keypoint']
+
+
+  dataloader:
+    batch_size: 1
+    # shuffle: True
+    num_workers: 1
+    pin_memory: True
+    prefetch_factor: 2
+    persistent_workers: True
