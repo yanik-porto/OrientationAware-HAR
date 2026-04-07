@@ -1,0 +1,398 @@
+encoder:
+  name: dualcond_protogcn
+  params:
+    num_person: 1
+    in_channels: 2
+    num_prototype: 400
+    model_dim: 384
+    graph_cfg:
+      layout: 'coco'
+      mode: 'random'
+      num_filter: 8
+      init_off: .04
+      init_std: .02
+    use_pe: true
+head:
+  name: textembeddualoutput
+  params:
+    num_classes: 120
+    in_channels: 384
+    mode: 'contrastive'
+    n_persons: 2
+    n_views: 2
+    text_embed_dim: 1536
+    lambda_loss: 0
+
+encoder_text:
+  name: text_encoder
+  params:
+    wpath: 'clip-ViT-B-32'
+    loader: 'sentence_transformer'
+    split_coma: True
+    n_splits: 3
+
+language:
+  json_file: "/home/pryntec/Projets/YP/mar-features-fusion/encoder/dataset/data/ntu/ntu60_gpt_12_angles_template.json"
+  mode: 'json'
+  indexes_keyword_train: '6'
+  indexes_keyword_test: '6'
+  # indexes_keyword_test: 'all'
+  # indexes_keyword_train: 'closest_node'
+  # indexes_keyword_test: 'closest_node'
+# language:
+#   mode: 'embeds'
+#   indexes_keyword_train: 'indexes'
+#   indexes_keyword_test: 'orientation'
+
+train:
+  optimizer:
+    name: adam
+    lr: 0.001
+    lr_decay: 0.1
+    milestones:
+    - 30
+  dataloader:
+    batch_size: 16
+    num_workers: 1
+    pin_memory: false
+    prefetch_factor: 2
+    persistent_workers: false
+  settings:
+    num_epochs: 100
+    save_interval: 1
+test:
+  dataloader:
+    batch_size: 1
+    num_workers: 1
+    pin_memory: false
+    prefetch_factor: 2
+    persistent_workers: false
+
+trainset:
+  dataset:
+    split: xsub_train
+    params:
+      num_classes: 60
+      n_views: 2
+      label_map: ../data/ntu/nturgbd_120.txt
+    use_negatives: true
+    name: ntu
+    file: ../data/ntu/ntu60_hrnet_ori.pkl
+  preprocessing:
+    PreNormalize2D:
+      threshold: 0.01
+      mode: auto_seq
+      concatenate: false
+    UniformSample:
+      clip_len: 150
+      reproducible: false
+    PoseDecode: 0
+    FormatGCNInput:
+      num_person: 2
+      mode: 'loop'
+    Collect:
+      keys:
+      - keypoint
+      - label
+      - closest_node
+      - orientation
+      meta_keys: []
+    ToTensor:
+      keys:
+      - keypoint
+      - orientation
+
+trainset_oneshot:
+  dataset:
+    split: xsub_train
+    use_negatives: true
+    params:
+      num_classes: 60
+      n_views: 2
+      label_map: ../data/ntu/nturgbd_120.txt
+      oneshot: true
+    name: ntu
+    file: ../data/ntu/ntu60_hrnet_ori.pkl
+  preprocessing:
+    PreNormalize2D:
+      threshold: 0.01
+      mode: auto_seq
+      concatenate: false
+    UniformSample:
+      clip_len: 150
+      reproducible: false
+    PoseDecode: 0
+    FormatGCNInputMV:
+      num_person: 2
+      num_view: 2
+      mode: 'loop'
+    Collect:
+      keys:
+      - keypoint
+      - label
+      - closest_node
+      - orientation
+      meta_keys: []
+    ToTensor:
+      keys:
+      - keypoint
+      - orientation
+
+trainset_30:
+  dataset:
+    split: xsub_train
+    use_negatives: true
+    params:
+      num_classes: 30
+      n_views: 2
+      label_map: ../data/ntu/nturgbd_120.txt
+      classes_map:
+        3:  0
+        4:  1
+        5:  2
+        9:  3
+        11: 4
+        14: 5
+        17: 6
+        19: 7
+        22: 8
+        23: 9
+        24: 10
+        28: 11
+        29: 12
+        30: 13
+        34: 14
+        35: 15
+        36: 16
+        37: 17
+        38: 18
+        40: 19
+        41: 20
+        43: 21
+        44: 22
+        46: 23
+        49: 24
+        50: 25
+        53: 26
+        54: 27
+        56: 28
+        57: 29
+    name: ntu
+    file: ../data/ntu/ntu60_hrnet_ori.pkl
+  preprocessing:
+    PreNormalize2D:
+      threshold: 0.01
+      mode: auto_seq
+      concatenate: false
+    UniformSample:
+      clip_len: 150
+      reproducible: false
+    PoseDecode: 0
+    FormatGCNInput:
+      num_person: 2
+      mode: 'loop'
+    Collect:
+      keys:
+      - keypoint
+      - label
+      - closest_node
+      - orientation
+      meta_keys: []
+    ToTensor:
+      keys:
+      - keypoint
+      - orientation
+
+testset:
+  dataset:
+    split: xsub_val
+    params:
+      num_classes: 60
+      n_views: 1
+      label_map: ../data/ntu/nturgbd_120.txt
+    name: ntu
+    file: ../data/ntu/ntu60_hrnet_ori.pkl
+  preprocessing:
+    PreNormalize2D:
+      threshold: 0.01
+      mode: auto_seq
+      concatenate: false
+    UniformSample:
+      clip_len: 150
+      reproducible: true
+    PoseDecode: 0
+    FormatGCNInput:
+      num_person: 2
+      mode: 'loop'
+    Collect:
+      keys:
+      - keypoint
+      - label
+      - closest_node
+      - orientation
+      meta_keys: []
+    ToTensor:
+      keys:
+      - keypoint
+      - orientation
+
+testset_mv:
+  dataset:
+    split: xsub_val
+    params:
+      num_classes: 60
+      n_views: 3
+      label_map: ../data/ntu/nturgbd_120.txt
+    name: ntu
+    file: ../data/ntu/ntu60_hrnet_ori.pkl
+  preprocessing:
+    PreNormalize2D:
+      threshold: 0.01
+      mode: auto_seq
+      concatenate: false
+    UniformSample:
+      clip_len: 150
+      reproducible: true
+    PoseDecode: 0
+    FormatGCNInput:
+      num_person: 2
+      mode: 'loop'
+    Collect:
+      keys:
+      - keypoint
+      - label
+      - closest_node
+      - orientation
+      meta_keys: []
+    ToTensor:
+      keys:
+      - keypoint
+      - orientation
+
+testset_30:
+  dataset:
+    split: xsub_val
+    params:
+      num_classes: 30
+      n_views: 1
+      label_map: ../data/ntu/nturgbd_120.txt
+      classes_map:
+        0: 0
+        1: 1
+        2: 2
+        6: 3
+        7: 4
+        8: 5
+        10: 6
+        12: 7
+        13: 8
+        15: 9
+        16: 10
+        18: 11
+        20: 12
+        21: 13
+        25: 14
+        26: 15
+        27: 16
+        31: 17
+        32: 18
+        33: 19
+        39: 20
+        42: 21
+        45: 22
+        47: 23
+        48: 24
+        51: 25
+        52: 26
+        55: 27
+        58: 28
+        59: 29
+    name: ntu
+    file: ../data/ntu/ntu60_hrnet_ori.pkl
+  preprocessing:
+    PreNormalize2D:
+      threshold: 0.01
+      mode: auto_seq
+      concatenate: false
+    UniformSample:
+      clip_len: 150
+      reproducible: true
+    PoseDecode: 0
+    FormatGCNInput:
+      num_person: 2
+      mode: 'loop'
+    Collect:
+      keys:
+      - keypoint
+      - label
+      - closest_node
+      - orientation
+      meta_keys: []
+    ToTensor:
+      keys:
+      - keypoint
+      - orientation
+
+testset_30_mv:
+  dataset:
+    split: xsub_val
+    params:
+      classes_map:
+        0: 0
+        1: 1
+        2: 2
+        6: 3
+        7: 4
+        8: 5
+        10: 6
+        12: 7
+        13: 8
+        15: 9
+        16: 10
+        18: 11
+        20: 12
+        21: 13
+        25: 14
+        26: 15
+        27: 16
+        31: 17
+        32: 18
+        33: 19
+        39: 20
+        42: 21
+        45: 22
+        47: 23
+        48: 24
+        51: 25
+        52: 26
+        55: 27
+        58: 28
+        59: 29
+      num_classes: 30
+      n_views: 2
+      label_map: ../data/ntu/nturgbd_120.txt
+    name: ntu
+    file: ../data/ntu/ntu60_hrnet_ori.pkl
+  preprocessing:
+    PreNormalize2D:
+      threshold: 0.01
+      mode: auto_seq
+      concatenate: false
+    UniformSample:
+      clip_len: 150
+      reproducible: true
+    PoseDecode: 0
+    FormatGCNInput:
+      num_person: 2
+      mode: 'loop'
+    Collect:
+      keys:
+      - keypoint
+      - label
+      - closest_node
+      - orientation
+      meta_keys: []
+    ToTensor:
+      keys:
+      - keypoint
+      - orientation

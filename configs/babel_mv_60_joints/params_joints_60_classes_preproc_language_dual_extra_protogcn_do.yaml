@@ -1,0 +1,188 @@
+encoder:
+  name: dualcond_protogcn
+  params:
+    num_person: 1
+    in_channels: 2
+    num_prototype: 400
+    model_dim: 384
+    graph_cfg:
+      layout: 'coco'
+      mode: 'random'
+      num_filter: 8
+      init_off: .04
+      init_std: .02
+    use_pe: True
+
+head:
+  name: textembeddualoutput
+  params:
+    num_classes: 120
+    in_channels: 384
+    mode: 'contrastive'
+
+
+language:
+  mode: 'embeds'
+  indexes_keyword_train: 'indexes'
+  indexes_keyword_test: '0'
+
+train:
+  optimizer:
+    name: adam
+    lr: 0.001
+    lr_decay: 0.1
+    milestones:
+    - 30
+  dataloader:
+    batch_size: 32
+    num_workers: 1
+    pin_memory: true
+    prefetch_factor: 2
+    persistent_workers: false
+  settings:
+    num_epochs: 50
+    save_interval: 1
+test:
+  dataloader:
+    batch_size: 1
+    num_workers: 1
+    pin_memory: true
+    prefetch_factor: 2
+    persistent_workers: false
+
+trainset_each:
+  dataset:
+    split: xsub_train
+    params:
+      n_views: 2
+      label_map: ../data/babel_mv/babel.txt
+      num_classes: 60
+    name: babel_mv
+    use_negatives: true
+    file: ../data/babel_mv/babel_120_joints_extra_preprocessed.pkl
+  preprocessing:
+    KeepIndexes:
+      indexes:
+      - 0
+      random: false
+      append_ori: true
+    UniformSample:
+      clip_len: 150
+    PoseDecode: 0
+    AddNoiseToKeypoints:
+      doMasking: false
+      addScores: true
+    Collect:
+      keys:
+      - keypoint
+      - label
+      - indexes
+      - orientation
+      meta_keys: []
+    ToTensor:
+      keys:
+      - keypoint
+      - orientation
+
+trainset:
+  dataset:
+    split: xsub_train
+    params:
+      n_views: 2
+      label_map: ../data/babel_mv/babel.txt
+      num_classes: 60
+    name: babel_mv
+    use_negatives: true
+    file: ../data/babel_mv/babel_120_joints_extra_preprocessed.pkl
+  preprocessing:
+    KeepIndexes:
+      indexes:
+      - 0
+      random: true
+      append_ori: true
+    UniformSample:
+      clip_len: 150
+    PoseDecode: 0
+    AddNoiseToKeypoints:
+      doMasking: false
+      addScores: true
+    Collect:
+      keys:
+      - keypoint
+      - label
+      - indexes
+      - orientation
+      meta_keys: []
+    ToTensor:
+      keys:
+      - keypoint
+      - orientation
+
+testset:
+  dataset:
+    split: xsub_val
+    params:
+      n_views: 1
+      label_map: ../data/babel_mv/babel.txt
+      num_classes: 60
+    name: babel_mv
+    file: ../data/babel_mv/babel_120_joints_extra_preprocessed.pkl
+  preprocessing:
+    KeepIndexes:
+      indexes:
+      - 0
+      append_ori: true
+    Collect:
+      keys:
+      - keypoint
+      - label
+      # - indexes
+      - orientation
+      meta_keys: []
+    ToTensor:
+      keys:
+      - keypoint
+      - orientation
+
+
+testset_all:
+  dataset:
+    split: xsub_val
+    params:
+      n_views: 1
+      label_map: ../data/babel_mv/babel.txt
+      # motionid_labels_path: ../data/babel_mv/motionid_to_labels.pkl
+      num_classes: 60
+    name: babel_mv
+    file: ../data/babel_mv/babel_120_joints_extra_preprocessed.pkl
+  preprocessing:
+    KeepIndexes:
+      indexes:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      append_ori: true
+    Collect:
+      keys:
+      - keypoint
+      - label
+      - orientation
+      meta_keys: []
+    ToTensor:
+      keys:
+      - keypoint
+      - orientation
+
+
+frozen_encoder: null
+n_gpus: 1
+n_views: 1
