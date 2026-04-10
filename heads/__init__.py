@@ -1,5 +1,6 @@
 from .head_text_embed import *
 from .head_base import *
+from .head_pool import *
 
 def create_head(config):
     assert 'head' in config, "no head specified in config"
@@ -11,6 +12,8 @@ def create_head(config):
     head = None
     if name == "base":
         head = HeadBase(**cfg_head["params"])
+    elif name == "pool":
+        head = HeadPool(**cfg_head["params"])
     elif name == "textembed":
         head = HeadTextEmbed(**cfg_head["params"])
     elif name == "textembeddualoutput":
