@@ -4,7 +4,7 @@ class SequenceNameSplitter():
     def __init__(self, dataset_name):
         self.dataset_name = dataset_name
 
-        if ("_tad" in self.dataset_name and self.dataset_name is not "pkummd_tad") or self.dataset_name == "tsu":
+        if ("_tad" in self.dataset_name and self.dataset_name != "pkummd_tad") or self.dataset_name == "tsu":
             self.dataset_name = "ntu_tad"
             print(f"Dataset name {self.dataset_name} not explicitly handled. Considering default dataset {self.dataset_name} for naming convention")
 

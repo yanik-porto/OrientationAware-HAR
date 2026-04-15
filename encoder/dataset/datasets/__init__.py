@@ -21,8 +21,10 @@ def create_dataset(config, setname="train12"):
     if name in ("babel_mv", "babel", "ntu","ts","nucla","rhm_har","mcad","posetics","tsu_pretrain","pkummd"):
         if use_negatives:
             dataset = DatasetMVNegative(op.join(op.dirname(__file__), cfg_dataset['file']), name, split=cfg_dataset["split"], preprocessing=preprocessing, **cfg_dataset["params"])
-        else:
+        elif name == "babel_mv":
             dataset = DatasetBabelMV(op.join(op.dirname(__file__), cfg_dataset['file']), split=cfg_dataset["split"], preprocessing=preprocessing, **cfg_dataset["params"])
+        else:
+            dataset = DatasetMV(op.join(op.dirname(__file__), cfg_dataset['file']), name, split=cfg_dataset["split"], preprocessing=preprocessing, **cfg_dataset["params"])
     else:
         print(name, " not handled yet in datasets")
 
