@@ -1,6 +1,7 @@
 # OrientationAware-HAR
 
 This is the repository that contains source code for the paper "Cross-Domain Human Action Recognition from Multiview Motion and Textual Descriptions"
+
 The paper is accepted to ICPR 2026.
 
 ## Abstract
@@ -13,6 +14,23 @@ pip install -r requirements.txt
 ```
 
 ## Test
+
+To test SAME_DOMAIN or ZSL, run the test with the config and checkpoint from the same folder.
+
+```shell
+python test.py checkpoints/ntu60/CROSS_DOMAIN/config.yaml checkpoints/ntu60/CROSS_DOMAIN/zsl.pth
+```
+
+To test ZSCD, run the chosen config from a CROSS_DOMAIN folder with the checkpoint from a SAME_DOMAIN folder.
+
+```shell
+python test.py checkpoints/ntu60/CROSS_DOMAIN/config.yaml checkpoints/babel_120/SAME_DOMAIN/best.pth
+```
+
+## Test Multi View Inference
+```shell
+python test_multi_view.py checkpoints/ntu60/CROSS_DOMAIN/config.yaml checkpoints/ntu60/CROSS_DOMAIN/zsl.pth --name=testset_mv
+```
 
 # Website License
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
