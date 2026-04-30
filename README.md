@@ -26,6 +26,7 @@ pip install -r requirements.txt
 
 ### Checkpoints
 
+Download the provided checkpoints from [here](checkpoints/README.md).
 ### Data
 
 ### Test
