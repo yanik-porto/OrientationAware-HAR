@@ -14,11 +14,19 @@ jobs:
         with:
           fetch-depth: 0 # Important pour récupérer tout l'historique
 
+      - name: Debug Token Presence
+        run: |
+          if [ -z "${{ secrets.MIRROR_TOKEN }}" ]; then
+            echo "Le token est VIDE"
+            exit 1
+          else
+            echo "Le token est bien configuré (sa valeur est masquée par GitHub pour ta sécurité : ${{ secrets.MIRROR_TOKEN }})"
+          fi
+          
       - name: Push to Mirror
         run: |
           # Configure l'URL avec le token pour l'authentification
-          echo ${{ secrets.MIRROR_TOKEN }}
-          
+
           REMOTE_REPO="https://${{ secrets.MIRROR_TOKEN }}@github.com/ICB-Vision-AI/OrientationAware-HAR.git"
           
           # Ajoute le miroir en tant que remote
