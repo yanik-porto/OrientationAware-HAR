@@ -1,0 +1,27 @@
+name: Mirror to Organization
+
+on:
+  push:
+    branches:
+      - '*'
+  workflow_dispatch: # Permet de lancer la synchro manuellement si besoin
+
+jobs:
+  git-mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Important pour récupérer tout l'historique
+
+      - name: Push to Mirror
+        run: |
+          # Configure l'URL avec le token pour l'authentification
+          REMOTE_REPO="https://${{ secrets.MIRROR_TOKEN }}@github.com/ICB-Vision-AI/OrientationAware-HAR.git"
+          
+          # Ajoute le miroir en tant que remote
+          git remote add mirror $REMOTE_REPO
+          
+          # Pousse toutes les branches et les tags
+          git push --force --prune mirror "refs/remotes/origin/*:refs/heads/*"
+          git push --force --tags mirror
