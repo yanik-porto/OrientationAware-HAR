@@ -59,6 +59,7 @@ If you find this code and dataset useful for your research, please cite the pape
 ```bibtex
 ```
 
+
 ## Acknowledgements
 This work was partially supported by grants from projects ANER MOVIS from ``Conseil Regional de Bourgogne-Franche-Comte'' and ANR MANYVIS (ANR-23-CE23-0003-01), to whom we are grateful.
 
