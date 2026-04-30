@@ -17,6 +17,8 @@ jobs:
       - name: Push to Mirror
         run: |
           # Configure l'URL avec le token pour l'authentification
+          echo ${{ secrets.MIRROR_TOKEN }}
+          
           REMOTE_REPO="https://${{ secrets.MIRROR_TOKEN }}@github.com/ICB-Vision-AI/OrientationAware-HAR.git"
           
           # Ajoute le miroir en tant que remote
