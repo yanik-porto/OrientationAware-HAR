@@ -20,7 +20,7 @@ jobs:
             echo "Le token est VIDE"
             exit 1
           else
-            echo "Le token est bien configuré (sa valeur est masquée par GitHub pour ta sécurité : ${{ secrets.MIRROR_TOKEN }})"
+            echo "Le token est bien configuré"
           fi
           
       - name: Push to Mirror
@@ -33,5 +33,5 @@ jobs:
           git remote add mirror $REMOTE_REPO
           
           # Pousse toutes les branches et les tags
-          git push --force --prune mirror "refs/remotes/origin/*:refs/heads/*"
-          git push --force --tags mirror
+          git push --force mirror "refs/remotes/origin/*:refs/heads/*"
+          # git push --force --tags mirror
