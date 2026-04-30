@@ -1,5 +1,10 @@
 # OrientationAware-HAR
 
+<div align="center">
+<img src='./static/images/overview.png' align="center" width="1280"/> <br>
+Our method leverages motion cues of multiple camera viewpoints and textual descriptions of human actions in the training phase to handle geometric domain gaps between the training and test sets. <br><br>
+</div>
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [Installation](#installation)
