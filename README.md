@@ -54,7 +54,7 @@ python test_multi_view.py checkpoints/ntu60/CROSS_DOMAIN/config.yaml checkpoints
 ```
 
 ## Citation
-If you find this code and dataset useful for your research, please cite the paper:
+If you find this code useful for your research, please cite the paper:
 
 ```bibtex
 ```
