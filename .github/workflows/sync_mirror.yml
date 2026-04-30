@@ -33,5 +33,6 @@ jobs:
           git remote add mirror $REMOTE_REPO
           
           # Pousse toutes les branches et les tags
-          git push --force mirror "refs/remotes/origin/*:refs/heads/*"
+          git push mirror
+          # "refs/remotes/origin/*:refs/heads/*"
           # git push --force --tags mirror
