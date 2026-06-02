@@ -1,4 +1,11 @@
-# OrientationAware-HAR
+<div align="center" style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;">
+        <h1 style="margin:0;text-align:center;">Orientation Aware - Human Action Recognition</h1>
+        <a href="https://arxiv.org/pdf/2605.22697" target="_blank">
+            <img src="https://img.shields.io/badge/arXiv-2605.22697-B31B1B?style=flat-square" alt="arXiv">
+        </a>
+    </div>
+</div>
 
 <div align="center">
 <img src='./static/images/overview.png' align="center" width="1280"/> <br>
