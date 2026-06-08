@@ -14,7 +14,7 @@ class TextEncoder():
             self.tokenizer = AutoTokenizer.from_pretrained(wpath, TOKENIZERS_PARALLELISM=True)
             self.target_token_idx = 0
         elif self.loader == 'sentence_transformer':
-            self.model = SentenceTransformer(wpath)
+            self.model = SentenceTransformer(wpath) # for 'clip-ViT-B-32' commit was '327ab6726d33c0e22f920c83f2ff9e4bd38ca37f' at experiment time
 
         self.split_coma = split_coma
         self.n_splits = n_splits

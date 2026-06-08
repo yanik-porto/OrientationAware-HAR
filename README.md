@@ -30,6 +30,7 @@ The paper is accepted to ICPR 2026.
 
 ## Installation
 
+All experiments were made with python 3.12.7.
 ```shell
 pip install -r requirements.txt
 ```
@@ -64,6 +65,12 @@ python test_multi_view.py checkpoints/ntu60/CROSS_DOMAIN/config.yaml checkpoints
 If you find this code useful for your research, please cite the paper:
 
 ```bibtex
+@article{porto2026cdhar,
+  title={Cross-Domain Human Action Recognition from Multiview Motion and Textual Descriptions},
+  author={Porto, Martins and Chalumeau, Demonceaux},
+  journal={ICPR},
+  year={2026}
+}
 ```
 
 ## Acknowledgements
