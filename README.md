@@ -67,7 +67,7 @@ If you find this code useful for your research, please cite the paper:
 ```bibtex
 @article{porto2026cdhar,
   title={Cross-Domain Human Action Recognition from Multiview Motion and Textual Descriptions},
-  author={Porto, Yannick and Martins, Renato and Chalumeau, Thomas and Demonceaux, C�dric},
+  author={Porto, Yannick and Martins, Renato and Chalumeau, Thomas and Demonceaux, Cédric},
   journal={ICPR},
   year={2026}
 }
