@@ -40,7 +40,18 @@ pip install -r requirements.txt
 ### Checkpoints
 
 Download the provided checkpoints from [here](checkpoints/README.md).
+
+Or directly with the command:
+
+`git clone https://huggingface.co/yaniknocigar/oa-har checkpoints`
+
 ### Data
+
+Download the provided data from [here](encoder/dataset/data/README.md).
+
+Or directly with the command:
+
+`git clone https://huggingface.co/datasets/yaniknocigar/oa-har encoder/dataset/data`
 
 ### Test
 
